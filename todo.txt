@@ -1,0 +1,19 @@
+[ ] Переопределить модель User.
+[ ] Добавить пути на страницы:
+    [ ] /
+    [ ] login
+    [ ] logout
+    [ ] <user_slug>
+[ ] добавить шаблоны:
+    [ ] base
+    [ ] login
+    [ ] main
+    [ ] profile
+    [ ] report
+    [ ] all_reports
+    [ ] day_reports
+    [ ] total_reports
+
+---
+
+Добавить код в base.html и путь к нему от view․
