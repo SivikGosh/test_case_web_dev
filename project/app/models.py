@@ -6,7 +6,7 @@ class User(AbstractUser):
     middle_name = models.CharField('Отчество', max_length=255, blank=True)
 
     def __srt__(self):
-        return f'{self.first_name}[0]. {self.middle_name}[0]. {self.last_name}'
+        return f'{self.first_name}. {self.middle_name}. {self.last_name}'
 
     class Meta:
         verbose_name = 'Пользователь'

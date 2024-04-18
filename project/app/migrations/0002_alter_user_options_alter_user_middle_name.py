@@ -12,11 +12,18 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='user',
-            options={'verbose_name': 'Пользователь', 'verbose_name_plural': 'Пользователи'},
+            options={
+                'verbose_name': 'Пользователь',
+                'verbose_name_plural': 'Пользователи'
+            },
         ),
         migrations.AlterField(
             model_name='user',
             name='middle_name',
-            field=models.CharField(blank=True, max_length=255, verbose_name='Отчество'),
+            field=models.CharField(
+                blank=True,
+                max_length=255,
+                verbose_name='Отчество'
+            ),
         ),
     ]

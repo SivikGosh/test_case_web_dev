@@ -5,21 +5,23 @@
     <table border="1">
         <thead>
             <tr>
-                <th>Имя пользователя</th>
-                <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Отчество</th>
+                <th>ФИО менеджера</th>
                 <th>Email</th>
+                <th>Персональная страница</th>
             </tr>
         </thead>
         <tbody>
-            {% for user in users %}
+            {% for manager in managers %}
                 <tr>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.last_name }}</td>
-                    <td>{{ user.first_name }}</td>
-                    <td>{{ user.middle_name }}</td>
-                    <td>{{ user.email }}</td>
+                    <td>
+                        {{ manager.last_name }}
+                        {{ manager.first_name }}
+                        {{ manager.middle_name }}
+                    </td>
+                    <td>{{ manager.email }}</td>
+                    <td>
+                        <a href="{% url "app:personal" pk=manager.pk %}">Отчёты</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

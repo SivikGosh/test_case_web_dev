@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
     <title>{% block title %}Тестовый сайт{% endblock %}</title>
 </head>
 
@@ -11,7 +12,13 @@
     <div id="sidebar" class="menu">
         <nav>
             {% block sidebar %}
-                <a href="{% url 'main' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+                <a href="{% url 'app:main' %}" class="{% if request.path == '/' %}active{% endif %}">Главная</a>
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'app:logout' %}" style="float: right">
+                    {% csrf_token %}
+                    <button type="submit">Выйти</button>
+                </form>
+                {% endif %}
             {% endblock %}
         </nav>
     </div>
