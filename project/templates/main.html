@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Пользователи</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ФИО менеджера</th>
+                <th>Email</th>
+                <th>Персональная страница</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for manager in managers %}
+                <tr>
+                    <td>
+                        {{ manager.last_name }}
+                        {{ manager.first_name }}
+                        {{ manager.middle_name }}
+                    </td>
+                    <td>{{ manager.email }}</td>
+                    <td>
+                        <a href="{% url "app:personal" pk=manager.pk %}">Отчёты</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
