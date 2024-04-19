@@ -2,7 +2,10 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
 from app.views import (
-    create_report, edit_report, get_main_page, get_manager_page
+    create_report,
+    edit_report,
+    get_main_page,
+    get_manager_page
 )
 
 app_name = 'app'

@@ -12,9 +12,7 @@
     <div id="sidebar" class="menu">
         <nav>
             {% block sidebar %}
-                {% if user.is_superuser %}
-                    <a href="{% url 'app:main' %}" class="{% if request.path == '/' %}active{% endif %}">Главная</a>
-                {% endif %}
+                <a href="{% url 'app:main' %}" class="{% if request.path == '/' %}active{% endif %}">Главная</a>
                 {% if user.is_authenticated %}
                     <form method="post" action="{% url 'app:logout' %}" style="float: right">
                         {% csrf_token %}

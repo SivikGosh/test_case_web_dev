@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, render
 from django.urls import reverse
+
 from app.forms import ReportForm
 from app.models import Report, User
 
@@ -60,12 +61,13 @@ def edit_report(request, pk):
             report.date = form.cleaned_data['date']
             report.income = form.cleaned_data['income']
             report.save()
-            return redirect(reverse('app:personal', kwargs={'pk': request.user.pk}))
+            return redirect(
+                reverse('app:personal', kwargs={'pk': request.user.pk})
+            )
     else:
         data = {
             'date': report.date,
             'income': report.income
         }
         form = ReportForm(initial=data)
-
     return render(request, 'report.html', {'form': form})
