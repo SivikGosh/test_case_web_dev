@@ -49,6 +49,7 @@ table tbody tr:hover {
     text-align: center;
     padding: 18px 16px;
     text-decoration: none;
+    background-color: #4CAF50;
 }
 
 .menu a:hover {
@@ -68,11 +69,6 @@ table tbody tr:hover {
     text-align: center;
     color: white;
     list-style: none;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
 }
 
 th, td {

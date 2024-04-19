@@ -1,8 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    привет, {{ request.user }}
-
+<h1>Отчёты пользователя {{ manager }}</h1>
+    {% if manager.pk == request.user.pk %}
+        <button type="submit" style="width: 200px"><a href="{% url 'app:report' %}">Добавить отчёт</a></button>
+    {% endif %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Выручка</th>
+                <th>Редактировать</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+                <tr>
+                    <td>{{ report.date }}</td>
+                    <td>{{ report.income }}</td>
+                    <td>
+                        {% if manager.pk == request.user.pk and report.date.month == current_month %}
+                            <button type="submit"><a href="{% url 'app:edit_report' pk=report.pk %}">Редактировать</a></button>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock content %}
 
