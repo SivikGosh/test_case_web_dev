@@ -24,6 +24,9 @@
             {% if next %}
                 <a href="{% url "app:daily_reports" date=next %}">след</a>
             {% endif %}
+            {% if prev %}
+                <a href="{% url "app:daily_reports" date=prev %}">пред</a>
+            {% endif %}
         </tbody>
     </table>
 {% endblock content %}

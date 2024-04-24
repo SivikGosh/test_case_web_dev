@@ -9,9 +9,34 @@ from app.models import Report, User
 @login_required
 def get_main_page(request):
     if request.user.is_superuser:
-        managers = User.objects.filter(is_superuser=False)
-        return render(request, 'main.html', {'managers': managers})
+        dates = [
+            date[0] for date
+            in Report.objects.values_list('date').order_by('-date').distinct()
+        ]
+        reports = Report.objects.filter(date=dates[0])
+        context = {'reports': reports}
+        if len(dates) > 1:
+            context.update({'next': dates[1]})
+        return render(request, 'main.html', context)
     return redirect(reverse('app:personal', kwargs={'pk': request.user.pk}))
+
+
+@login_required
+def get_daily_reports_page(request, date):
+    dates = [
+        str(date[0]) for date
+        in Report.objects.values_list('date').order_by('-date').distinct()
+    ]
+    date_index = dates.index(date)
+    reports = Report.objects.filter(date=date)
+    context = {'reports': reports}
+    if len(dates) > 1:
+        if date_index < len(dates) - 1:
+            context.update({'next': dates[date_index + 1]})
+        if date_index == 1:
+            context.update({'prev': reverse('app:main')})
+        context.update({'prev': dates[date_index - 1]})
+    return render(request, 'daily_reports.html', context)
 
 
 @login_required
