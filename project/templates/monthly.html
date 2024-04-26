@@ -4,18 +4,15 @@
     <table border="1">
         <thead>
             <tr>
-                <th>ФИО менеджера</th>
-                <th>Дата</th>
-                <th>Выручка</th>
-                <th>Страница менеджера</th>
+                <th>Месяц</th>
+                <th>Общая сумма</th>
             </tr>
         </thead>
         <tbody>
-            {% for report in reports %}
+            {% for income in total_income %}
                 <tr>
-                    <td>{{ report.manager }}</td>
-                    <td>{{ report.date }}</td>
-                    <td>{{ report.income }}</td>
+                    <td>{{ income.month }} {{ income.year }}</td>
+                    <td>{{ income.total }}</td>
                 </tr>
             {% endfor %}
             {% if next %}

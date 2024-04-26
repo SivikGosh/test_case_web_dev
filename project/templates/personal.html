@@ -8,6 +8,7 @@
     <table border="1">
         <thead>
             <tr>
+                <th>Адрес</th>
                 <th>Дата</th>
                 <th>Выручка</th>
                 <th>Редактировать</th>
@@ -16,6 +17,7 @@
         <tbody>
             {% for report in reports %}
                 <tr>
+                    <td>{{ report.address }}</td>
                     <td>{{ report.date }}</td>
                     <td>{{ report.income }}</td>
                     <td>

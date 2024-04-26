@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from app.models import Report, User
+from app.models import Report, Role, User
 
 
 @admin.register(User)
@@ -27,7 +27,8 @@ class UserAdmin(BaseUserAdmin):
                 'is_staff',
                 'is_superuser',
                 'groups',
-                'user_permissions'
+                'user_permissions',
+                'role'
             )
         }),
         ('Important dates', {
@@ -42,3 +43,8 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):
     list_display = ('manager', 'date', 'income')
+
+
+@admin.register(Role)
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')

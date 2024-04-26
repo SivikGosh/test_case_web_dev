@@ -16,9 +16,6 @@
                     <td>{{ report.manager }}</td>
                     <td>{{ report.date }}</td>
                     <td>{{ report.income }}</td>
-                    <td>
-                        {% comment %} <a href="{% url "app:personal" pk=report.manager.pk %}">Отчёты</a> {% endcomment %}
-                    </td>
                 </tr>
             {% endfor %}
             {% if next %}
