@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Пользователи</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ФИО менеджера</th>
+                <th>Дата</th>
+                <th>Выручка</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+                <tr>
+                    <td>{{ report.manager }}</td>
+                    <td>{{ report.date }}</td>
+                    <td>{{ report.income }}</td>
+                </tr>
+            {% endfor %}
+            {% if next %}
+                <a href="{% url "app:daily_reports" date=next %}">след</a>
+            {% endif %}
+            {% if prev %}
+                <a href="{% url "app:daily_reports" date=prev %}">пред</a>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock content %}

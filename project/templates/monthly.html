@@ -6,13 +6,16 @@
             <tr>
                 <th>Месяц</th>
                 <th>Общая сумма</th>
+                <td></td>
             </tr>
         </thead>
         <tbody>
-            {% for income in total_income %}
+            {% for income in month_income %}
                 <tr>
                     <td>{{ income.month }} {{ income.year }}</td>
                     <td>{{ income.total }}</td>
+                    <td><a href="{% url "app:monthly_detail" month=income.detail %}">{{ income.detail }}</a></td>
+                    {% comment %} <td>{{ income.detail }}</td> {% endcomment %}
                 </tr>
             {% endfor %}
             {% if next %}
