@@ -4,23 +4,19 @@
     <table border="1">
         <thead>
             <tr>
-                <th>ФИО менеджера</th>
+                <th>Менеджер</th>
                 <th>Дата</th>
                 <th>Выручка</th>
-                <th>Страница менеджера</th>
             </tr>
         </thead>
         <tbody>
             {% for report in reports %}
                 <tr>
-                    <td>{{ report.manager }}</td>
+                    <td>{{ report.manager.last_name }} {{ report.manager.first_name }} {{ report.manager.middle_name }}</td>
                     <td>{{ report.date }}</td>
-                    <td>{{ report.income }}</td>
+                    <td>{{ report.income }} &#8381;</td>
                 </tr>
             {% endfor %}
-            {% if next %}
-                <a href="{% url "app:daily_reports" date=next %}">след</a>
-            {% endif %}
         </tbody>
     </table>
 {% endblock content %}

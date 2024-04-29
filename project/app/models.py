@@ -48,10 +48,13 @@ class Report(models.Model):
         related_name='reports'
     )
     address = models.CharField(
+        verbose_name='Адрес',
         max_length=255,
         null=True
     )
-    date = models.DateField()
+    date = models.DateField(
+        verbose_name='Дата'
+    )
     income = models.DecimalField(
         verbose_name='Выручка',
         max_digits=7,

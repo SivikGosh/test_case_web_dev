@@ -1,28 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Пользователи</h1>
-    <table border="1">
+    <h1>Сводные отчёты по месяцам</h1>
+    <table border="0">
         <thead>
             <tr>
-                <th>ФИО менеджера</th>
-                <th>Дата</th>
-                <th>Выручка</th>
+                <th>Месяц</th>
+                <th>Общая сумма</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            {% for report in reports %}
+            {% for income in month_income %}
                 <tr>
-                    <td>{{ report.manager }}</td>
-                    <td>{{ report.date }}</td>
-                    <td>{{ report.income }}</td>
+                    <td>{{ income.month }} {{ income.year }}</td>
+                    <td>{{ income.total }},00 &#8381;</td>
+                    <td><a href="{% url "app:monthly_detail" month=income.detail %}" class="personal_page">детализация</a></td>
                 </tr>
             {% endfor %}
-            {% if next %}
-                <a href="{% url "app:daily_reports" date=next %}">след</a>
-            {% endif %}
-            {% if prev %}
-                <a href="{% url "app:daily_reports" date=prev %}">пред</a>
-            {% endif %}
         </tbody>
     </table>
 {% endblock content %}

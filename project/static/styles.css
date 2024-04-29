@@ -1,6 +1,7 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: monospace;
     background-color: #f1f1f1;
+    margin: 0;
 }
 
 h1 {
@@ -9,27 +10,24 @@ h1 {
 }
 
 table {
-    width: 70%;
+    width: 600px;
     border-collapse: collapse;
     margin: 20px auto 0;
+    border: 1px solid #adadad;
 }
 
 table th,
 table td {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 8px;
 }
 
 table th {
-    background-color: #f2f2f2;
+    background-color: white;
 }
 
-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-table tbody tr:hover {
-    background-color: #e5e5e5;
+table tbody {
+    background-color: white;
 }
 
 @media (max-width: 512px) {
@@ -39,8 +37,11 @@ table tbody tr:hover {
 }
 
 .menu {
+    padding: 10px;
     overflow: hidden;
     margin: 0 auto;
+    background-color: white;
+    border-bottom: 1px solid #d3d3d3;
 }
 
 .menu a {
@@ -48,21 +49,24 @@ table tbody tr:hover {
     display: block;
     color: white;
     text-align: center;
-    padding: 18px 16px;
+    padding: 10px 20px;
     text-decoration: none;
-    background-color: #4CAF50;
+    margin: 0px 5px;
+    background-color: #696969;
 }
 
 .menu a:hover {
-    background-color: #555;
+    background-color: #4c75a3;
+    transition: background-color 0.2s;
 }
 
-.active {
-    background-color: black;
+a.active_page {
+    background-color: #4c75a3;
+    color: white;
 }
 
 .menu nav {
-    width: 70%;
+    width: 1200px;
     margin: 0 auto;
 }
 
@@ -73,7 +77,7 @@ table tbody tr:hover {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     padding: 8px;
     text-align: center;
 }
@@ -85,4 +89,134 @@ th {
 /* Скрыть границы для последнего столбца */
 td:last-child, th:last-child {
     border-right: none;
+}
+
+div#content {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+table.daily {
+    float: left;
+    width: 800px;
+    margin: 0 0 0 75px;
+}
+
+div.daily_buttons {
+    width: 150px;
+    margin: 0 auto;
+    float: right;
+    margin: 0 75px 0 0;
+}
+
+div.daily_buttons a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    width: auto;
+    text-decoration: none;
+    color: black;
+}
+div.daily_buttons a:hover {
+    text-decoration: none;
+    color: white;
+    background: #4c75a3;
+    transition: background-color 0.2s;
+}
+div.daily_buttons a.active {
+    text-decoration: none;
+    color: white;
+    background: #4c75a3;
+}
+
+a.personal_page {
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: #696969;
+}
+
+a.personal_page:hover {
+    background-color: #4c75a3;
+    color: white;
+    transition: background-color 0.2s;
+    
+}
+
+.my-form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    margin: 50px auto 0;
+    border: 1px solid #d5d5d5;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    margin: 13px 4px 13px 0px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.form_date,
+.form_address {
+    padding: 5px;
+    margin: 5px;
+}
+
+#id_date_day {
+    width: 70px;
+}
+
+#id_date_year {
+    width: 90px;
+}
+
+#id_date_month {
+    width: 110px;
+}
+
+.form_address {
+    width: 278px;
+}
+
+.form_income {
+    padding: 5px;
+    width: 278px;
+    margin: 5px;
+}
+
+button.submit-button {
+    margin: 50px auto 0;
+    background-color: #4c75a3;
+    color: white;
+    width: auto;
+}
+button.submit-button:hover {
+    background-color: #696969;
+}
+button.submit-button:active {
+    background-color: #4c75a3;
 }

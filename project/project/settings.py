@@ -65,6 +65,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'app.context_processors.current_month',
+                'app.context_processors.newest_date_reports',
             ],
         },
     },
@@ -132,5 +133,5 @@ AUTH_USER_MODEL = "app.User"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_URL = 'app:login'
-LOGIN_REDIRECT_URL = 'app:main'
+LOGIN_REDIRECT_URL = 'app:main_page'
 LOGOUT_REDIRECT_URL = 'app:login'

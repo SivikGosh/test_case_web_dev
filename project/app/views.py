@@ -5,107 +5,95 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.db.models import CharField, F, Sum, Value
-from django.db.models.functions import Concat, ExtractMonth, ExtractYear
+from django.db.models import CharField, DecimalField, F, Sum, Value
+from django.db.models.functions import Cast, Concat, ExtractMonth, ExtractYear
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from app.forms import ReportForm
 from app.models import Report, User
 
-
-@login_required
-def get_main_page(request):
-    """Главная страница. Она же первая страница ежедневных отчётов."""
-
-    if request.user.role.slug != 'admin':
-        return redirect(
-            reverse('app:personal', kwargs={'pk': request.user.pk})
-        )
-
-    dates = [
-        date[0] for date
-        in Report.objects.values_list('date').order_by('-date').distinct()
-    ]
-
-    reports = Report.objects.filter(date=dates[0])
-    context = {'reports': reports}
-
-    if len(dates) > 1:
-        context.update({'next': dates[1]})
-
-    return render(request, 'main.html', context)
+# Страницы для админа
 
 
 @login_required
-def get_daily_reports(request, date):
-    """Страницы едежневных отчётов, все, кроме первой."""
+def main_page(request):
+    """Главная страница."""
 
-    if request.user.role.slug != 'admin':
-        return render(request, '404.html', {'users': request.user})
+    if request.user.role.slug == 'admin':
+        managers = User.objects.filter(role__slug='manager')
+        return render(request, 'main_page.html', {'managers': managers})
 
-    dates = [
-        str(date[0]) for date
-        in Report.objects.values_list('date').order_by('-date').distinct()
-    ]
-
-    date_index = dates.index(date)
-    reports = Report.objects.filter(date=date)
-    context = {'reports': reports}
-
-    if len(dates) > 1:
-        if date_index < len(dates) - 1:
-            context.update({'next': dates[date_index + 1]})
-        if date_index == 1:
-            context.update({'prev': reverse('app:main')})
-        context.update({'prev': dates[date_index - 1]})
-
-    return render(request, 'daily_reports.html', context)
+    return redirect(reverse('app:personal', kwargs={'pk': request.user.pk}))
 
 
 @login_required
-def get_monthly_reports(request):
+def daily_reports(request, date):
+    """Страницы ежедневных отчётов."""
+
+    if request.user.role.slug == 'admin':
+        dates = [
+            str(date[0]) for date
+            in Report.objects.values_list('date').order_by('-date').distinct()
+        ]
+        reports = Report.objects.filter(date=date)
+        context = {'reports': reports, 'dates': dates, 'current_date': date}
+        return render(request, 'daily_reports.html', context)
+
+    return render(request, '404.html')
+
+
+@login_required
+def monthly_reports(request):
     """Общая страница сводных отчётов."""
 
-    if request.user.role.slug != 'admin':
-        return render(request, '404.html', {'users': request.user})
-
-    locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
-
-    month_income = (
-        Report.objects
-        .annotate(month=ExtractMonth('date'))
-        .values('month')
-        .annotate(year=ExtractYear('date'))
-        .annotate(total=Sum('income'))
-        .annotate(
-            detail=Concat(
-                F('month'), Value('-'), F('year'), output_field=CharField()
+    if request.user.role.slug == 'admin':
+        locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
+        month_income = (
+            Report.objects
+            .annotate(month=ExtractMonth('date'))
+            .values('month')
+            .annotate(year=ExtractYear('date'))
+            .annotate(total=Cast(Sum('income'), output_field=DecimalField()))
+            .annotate(
+                detail=(
+                    Concat(
+                        F('month'),
+                        Value('-'),
+                        F('year'),
+                        output_field=CharField()
+                    )
+                )
             )
         )
-    )
+        for income in month_income:
+            month_number = income['month']
+            income['month'] = datetime(1990, month_number, 1).strftime('%B')
+        return render(
+            request, 'monthly_reports.html', {'month_income': month_income}
+        )
 
-    for income in month_income:
-        month_number = income['month']
-        income['month'] = datetime(1990, month_number, 1).strftime('%B')
-
-    return render(request, 'monthly.html', {'month_income': month_income})
+    return render(request, '404.html', {'users': request.user})
 
 
 @login_required
-def get_monthly_detail_report(request, month):
+def monthly_detail(request, month):
     """Страница детализации отчётности за выбранный месяц."""
 
-    if request.user.role.slug != 'admin':
-        return render(request, '404.html', {'users': request.user})
+    if request.user.role.slug == 'admin':
+        month_year = month.split('-')
+        reports = (
+            Report.objects.filter(
+                date__year=month_year[1],
+                date__month=month_year[0]
+            )
+        )
+        return render(request, 'monthly_detail.html', {'reports': reports})
 
-    month_year = month.split('-')
+    return render(request, '404.html', {'users': request.user})
 
-    reports = Report.objects.filter(
-        date__year=month_year[1], date__month=month_year[0]
-    )
 
-    return render(request, 'monthly_reports.html', {'reports': reports})
+# Страницы для менеджера
 
 
 @login_required
@@ -118,7 +106,7 @@ def get_manager_page(request, pk):
         and pk != 1
     ):
         if request.user.pk == pk and request.user.role.slug == 'admin':
-            return redirect(reverse('app:main'))
+            return redirect(reverse('app:main_page'))
 
         reports = Report.objects.filter(manager=pk).order_by('-date')
         manager = User.objects.get(pk=pk)
@@ -126,7 +114,6 @@ def get_manager_page(request, pk):
             'reports': reports,
             'manager': manager
         }
-
         return render(request, 'personal.html', context)
 
     return render(request, '404.html', {'users': request.user})
@@ -137,7 +124,7 @@ def create_report(request):
     """Страница добавления отчёта."""
 
     if request.user.role.slug == 'admin':
-        return redirect(reverse('app:main'))
+        return redirect(reverse('app:main_page'))
 
     if request.method == 'POST':
         form = ReportForm(request.POST)

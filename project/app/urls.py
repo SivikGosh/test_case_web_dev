@@ -1,44 +1,29 @@
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 
 from app.views import (
+    CustomLoginView,
     create_report,
+    daily_reports,
     edit_report,
-    get_daily_reports,
-    get_main_page,
     get_manager_page,
-    get_monthly_reports,
-    get_monthly_detail_report,
-    CustomLoginView
+    monthly_detail,
+    monthly_reports,
+    main_page,
 )
 
 app_name = 'app'
 
 urlpatterns = [
-    path(
-        '',
-        get_main_page,
-        name='main'
-    ),
+    path('', main_page, name='main_page'),
+    path('daily/<slug:date>/', daily_reports, name='daily_reports'),
+    path('monthly/', monthly_reports, name='monthly_reports'),
+    path('monthly/<slug:month>/', monthly_detail, name='monthly_detail'),
+
     path(
         'managers/<int:pk>/',
         get_manager_page,
         name='personal'
-    ),
-    path(
-        'monthly/',
-        get_monthly_reports,
-        name='monthly'
-    ),
-    path(
-        'monthly/<slug:month>/',
-        get_monthly_detail_report,
-        name='monthly_detail'
-    ),
-    path(
-        'daily/<slug:date>/',
-        get_daily_reports,
-        name='daily_reports'
     ),
     path(
         'report/',
