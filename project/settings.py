@@ -65,7 +65,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'app.context_processors.current_month',
-                'app.context_processors.newest_date_reports',
+                # 'app.context_processors.newest_date_reports',
             ],
         },
     },
