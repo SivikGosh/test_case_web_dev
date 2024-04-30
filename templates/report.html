@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Отчёт пользователя {{ request.user.last_name }} {{ request.user.first_name }} {{ request.user.middle_name }}</h1>
+    <form method="post" class="my-form">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-field">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="submit-button">Сохранить</button>
+    </form>
+    
+{% endblock content %}

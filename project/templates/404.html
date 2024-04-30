@@ -1,7 +1,0 @@
-{% extends "base.html" %}
-
-{% block content %}
-    404
-    <a href="{% url 'app:main' %}" class="{% if request.path == '/' %}active{% endif %}">Главная</a>
-{% endblock content %}
-

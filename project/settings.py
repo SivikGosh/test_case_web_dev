@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-*m=x7h))vb03$4xb6vlut7j_kn-mrms@@6+wik*m$r&tzge&"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -64,6 +64,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'app.context_processors.current_month',
+                'app.context_processors.newest_date_reports',
             ],
         },
     },
@@ -131,5 +133,5 @@ AUTH_USER_MODEL = "app.User"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_URL = 'app:login'
-LOGIN_REDIRECT_URL = 'app:main'
+LOGIN_REDIRECT_URL = 'app:main_page'
 LOGOUT_REDIRECT_URL = 'app:login'

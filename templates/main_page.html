@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Страница пользователя "{{ request.user.role }}"</h1>
+    <h2>Список менеджеров</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for manager in managers %}
+                <tr>
+                    <td>{{ manager.last_name }} {{ manager.first_name }} {{ manager.middle_name }}</td>
+                    <td><a href="{% url "app:personal" pk=manager.pk %}" class="personal_page">страница</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

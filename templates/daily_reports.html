@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Отчёт за {{ request.resolver_match.kwargs.date }}</h1>
+    <table border="0" class="daily">
+        <thead>
+            <tr>
+                <th>Менеджер</th>
+                <th>Адрес</th>
+                <th>Выручка</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+                <tr>
+                    <td>{{ report.manager.last_name }} {{ report.manager.first_name }} {{ report.manager.middle_name }}</td>
+                    <td>{{ report.address }}</td>
+                    <td>{{ report.income }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="daily_buttons">
+        {% for date in dates %}
+            <a href="{% url "app:daily_reports" date=date %}" class="{% if request.resolver_match.view_name == 'app:daily_reports' %}{% if request.resolver_match.kwargs.date == date %}active{% endif %}{% endif %}">{{ date }}</a>
+        {% endfor %}
+    </div>
+{% endblock content %}

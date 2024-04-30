@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Сводные отчёты по месяцам</h1>
+    <table border="0">
+        <thead>
+            <tr>
+                <th>Месяц</th>
+                <th>Общая сумма</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for income in month_income %}
+                <tr>
+                    <td>{{ income.month }} {{ income.year }}</td>
+                    <td>{{ income.total }},00 &#8381;</td>
+                    <td><a href="{% url "app:monthly_detail" month=income.detail %}" class="personal_page">детализация</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

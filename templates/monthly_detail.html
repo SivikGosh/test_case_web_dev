@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Пользователи</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Менеджер</th>
+                <th>Дата</th>
+                <th>Выручка</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+                <tr>
+                    <td>{{ report.manager.last_name }} {{ report.manager.first_name }} {{ report.manager.middle_name }}</td>
+                    <td>{{ report.date }}</td>
+                    <td>{{ report.income }} &#8381;</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
