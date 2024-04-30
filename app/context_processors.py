@@ -11,4 +11,7 @@ def newest_date_reports(request):
         str(date[0]) for date
         in Report.objects.values_list('date').order_by('-date').distinct()
     ]
-    return {'newest_date': dates[0]}
+    try:
+        return {'newest_date': dates[0]}
+    except IndexError:
+        return {'newest_date': datetime.now().date}
