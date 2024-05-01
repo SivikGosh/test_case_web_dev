@@ -151,6 +151,7 @@ def edit_report(request, pk):
         form = ReportForm(request.POST)
         if form.is_valid():
             report.address = form.cleaned_data['address']
+            report.date = form.cleaned_data['date']
             report.income = form.cleaned_data['income']
             report.save()
             return redirect(
