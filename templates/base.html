@@ -11,8 +11,8 @@
                 <div id="sidebar" class="menu">
                     <nav>
                         {% block sidebar %}
+                            <a href="{% url 'app:main_page' %}" class="{% if request.resolver_match.view_name == 'app:main_page' %}active_page{% endif %}">Главная</a>
                             {% if request.user.role.slug == 'admin' %}
-                                <a href="{% url 'app:main_page' %}" class="{% if request.resolver_match.view_name == 'app:main_page' %}active_page{% endif %}">Главная</a>
                                 <a href="{% url 'app:daily_reports' date=newest_date %}" class="{% if request.resolver_match.view_name == 'app:daily_reports' %}{% if request.resolver_match.kwargs.date == newest_date %}active_page{% endif %}{% endif %}">Ежедневные отчёты</a>
                                 <a href="{% url 'app:monthly_reports' %}" class="{% if request.resolver_match.view_name == 'app:monthly' %}active_page{% endif %}">Сводные отчёты</a>
                             {% endif %}
