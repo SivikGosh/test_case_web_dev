@@ -1,5 +1,3 @@
-
-import locale
 from datetime import datetime
 
 from django.contrib import messages
@@ -48,7 +46,6 @@ def monthly_reports(request):
     """Общая страница сводных отчётов."""
 
     if request.user.role.slug == 'admin':
-        locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
         month_income = (
             Report.objects
             .annotate(month=ExtractMonth('date'))
@@ -66,9 +63,6 @@ def monthly_reports(request):
                 )
             )
         )
-        for income in month_income:
-            month_number = income['month']
-            income['month'] = datetime(1990, month_number, 1).strftime('%B')
         return render(
             request, 'monthly_reports.html', {'month_income': month_income}
         )
