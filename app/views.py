@@ -1,4 +1,5 @@
 from datetime import datetime
+from time import sleep
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -178,3 +179,7 @@ class CustomLoginView(LoginView):
                 или такого пользователя не существует.'
         )
         return response
+
+
+def page_not_found(request, exception):
+    return render(request, '404.html', {'path': request.path}, status=404)
