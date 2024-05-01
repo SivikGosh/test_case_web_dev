@@ -7,9 +7,9 @@ from app.views import (
     daily_reports,
     edit_report,
     get_manager_page,
+    main_page,
     monthly_detail,
     monthly_reports,
-    main_page,
 )
 
 app_name = 'app'
@@ -19,29 +19,9 @@ urlpatterns = [
     path('daily/<slug:date>/', daily_reports, name='daily_reports'),
     path('monthly/', monthly_reports, name='monthly_reports'),
     path('monthly/<slug:month>/', monthly_detail, name='monthly_detail'),
-
-    path(
-        'managers/<int:pk>/',
-        get_manager_page,
-        name='personal'
-    ),
-    path(
-        'report/',
-        create_report,
-        name='report'),
-    path(
-        'report/<int:pk>/edit/',
-        edit_report,
-        name='edit_report'
-    ),
-    path(
-        'login/',
-        CustomLoginView.as_view(),
-        name='login'
-    ),
-    path(
-        'logout/',
-        LogoutView.as_view(),
-        name='logout'
-    ),
+    path('managers/<int:pk>/', get_manager_page, name='personal'),
+    path('report/', create_report, name='report'),
+    path('report/<int:pk>/edit/', edit_report, name='edit_report'),
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout')
 ]
