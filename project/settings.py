@@ -136,9 +136,7 @@ LOGIN_REDIRECT_URL = 'app:main_page'
 LOGOUT_REDIRECT_URL = 'app:login'
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://eventfun.ru:8000/",
-    "http://84.252.73.12/:8000/",
-    "http://eventfun.ru",
-    "http://84.252.73.12",
+    "http://eventfun.ru:8000",
+    "http://84.252.73.12/:8000",
     'http://localhost:8000'
     ]
