@@ -8,15 +8,14 @@ class Role(models.Model):
     )
     slug = models.CharField(
         max_length=255,
-        null=True
     )
-
-    def __str__(self):
-        return self.name
 
     class Meta:
         verbose_name = 'Роль'
         verbose_name_plural = 'Роли'
+
+    def __str__(self):
+        return self.name
 
 
 class User(AbstractUser):
@@ -50,7 +49,6 @@ class Report(models.Model):
     address = models.CharField(
         verbose_name='Адрес',
         max_length=255,
-        null=True
     )
     date = models.DateField(
         verbose_name='Дата'
@@ -61,9 +59,9 @@ class Report(models.Model):
         decimal_places=2
     )
 
-    def __str__(self):
-        return str(self.date)
-
     class Meta:
         verbose_name = 'Отчёт'
         verbose_name_plural = 'Отчёты'
+
+    def __str__(self):
+        return str(self.date)

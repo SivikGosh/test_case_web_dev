@@ -1,11 +1,13 @@
-FROM python:3.12.2-slim
+FROM python:3.13
 
-WORKDIR /app
+WORKDIR /project
 
-COPY . .
+COPY ./project/ ./
+COPY ./pyproject.toml .
 
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip
+RUN pip install .
 
-EXPOSE 8000
+RUN python manage.py collectstatic --noinput
 
-CMD gunicorn 'project.wsgi' --bind=0.0.0.0:8000
+CMD [ "gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000" ]

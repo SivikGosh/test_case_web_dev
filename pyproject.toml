@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=80.9", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["project"]
+
+[project]
+name = "employees"
+version = "1.0.0"
+description = "Workspace for employees."
+requires-python = ">=3.13"
+dependencies = [
+    "Django>=5.0",
+    "gunicorn>=22.0",
+]
+
+[project.optional-dependencies]
+dev = ["ruff", "pre-commit", "pipdeptree"]
+
+[tool.ruff.lint]
+select = ["E", "F", "DJ", "I", "B"]
+exclude = ["venv", ".venv", "__pycache__", "**/migrations/**"]
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 79

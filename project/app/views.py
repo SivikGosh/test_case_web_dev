@@ -1,5 +1,4 @@
 from datetime import datetime
-from time import sleep
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required

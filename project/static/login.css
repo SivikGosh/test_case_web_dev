@@ -11,11 +11,13 @@ h1 {
     text-align: center;
     color: #333;
     margin-bottom: 50px;
+    font-size: 30px;
 }
 
 h2 {
     text-align: center;
     color: #333;
+    font-size: 25px;
 }
 
 .form-group {

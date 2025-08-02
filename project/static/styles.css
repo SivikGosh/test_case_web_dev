@@ -19,8 +19,9 @@ table {
 
 table th,
 table td {
-    /* border: 1px solid #ccc; */
+    border: 1px solid #ccc;
     padding: 8px;
+    font-size: 15px;
 }
 
 table th {
@@ -110,6 +111,7 @@ div.daily_buttons {
     margin: 0 auto;
     float: right;
     margin: 0 75px 0 0;
+    font-size: 15px;
 }
 
 div.daily_buttons a {

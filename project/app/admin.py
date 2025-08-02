@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from app.models import Report, Role, User
+from .models import Report, Role, User
 
 
 @admin.register(User)
@@ -19,8 +19,8 @@ class UserAdmin(BaseUserAdmin):
                 'middle_name',
                 'last_name',
                 'email'
-            )
-        }),
+            )}
+        ),
         ('Permissions', {
             'fields': (
                 'is_active',
