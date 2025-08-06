@@ -16,7 +16,8 @@
                 <th>Дата</th>
                 <th>Выручка</th>
                 {% if request.user.role.slug == 'manager' %}
-                <th>Редактировать</th>
+                <th></th>
+                <th></th>
                 {% endif %}
             </tr>
         </thead>
@@ -30,6 +31,11 @@
                     <td>
                         {% if manager.pk == request.user.pk and report.date.month == current_month %}
                             <a href="{% url 'app:edit_report' pk=report.pk %}" class="personal_page">Редактировать</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if manager.pk == request.user.pk %}
+                            <a href="{% url 'app:delete_report' pk=report.pk %}" class="personal_page">Удалить</a>
                         {% endif %}
                     </td>
                     {% endif %}

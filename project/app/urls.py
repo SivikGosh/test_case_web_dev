@@ -5,6 +5,7 @@ from app.views import (
     CustomLoginView,
     create_report,
     daily_reports,
+    delete_report,
     edit_report,
     get_manager_page,
     main_page,
@@ -22,6 +23,7 @@ urlpatterns = [
     path('managers/<int:pk>/', get_manager_page, name='personal'),
     path('report/', create_report, name='report'),
     path('report/<int:pk>/edit/', edit_report, name='edit_report'),
+    path('report/<int:pk>/delete/', delete_report, name='delete_report'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout')
 ]

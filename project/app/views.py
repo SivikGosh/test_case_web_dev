@@ -167,6 +167,13 @@ def edit_report(request, pk):
     return render(request, 'report.html', {'form': form})
 
 
+@login_required
+def delete_report(request, pk):
+    report = Report.objects.get(pk=pk)
+    report.delete()
+    return redirect(reverse('app:personal', kwargs={'pk': request.user.pk}))
+
+
 class CustomLoginView(LoginView):
     """Авторизация."""
 
