@@ -7,7 +7,7 @@ include = ["project"]
 
 [project]
 name = "employees"
-version = "1.0.1"
+version = "1.0.2"
 description = "Workspace for employees."
 requires-python = ">=3.13"
 dependencies = [

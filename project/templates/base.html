@@ -16,8 +16,8 @@
                                 <a href="{% url 'app:daily_reports' date=newest_date %}" class="{% if request.resolver_match.view_name == 'app:daily_reports' %}{% if request.resolver_match.kwargs.date == newest_date %}active_page{% endif %}{% endif %}">Ежедневные отчёты</a>
                                 <a href="{% url 'app:monthly_reports' %}" class="{% if request.resolver_match.view_name == 'app:monthly_reports' %}active_page{% endif %}">Сводные отчёты</a>
                             {% endif %}
-                            {% if manager.pk == request.user.pk %}
-                                <a href="{% url 'app:report' %}">Добавить отчёт</a>
+                            {% if manager.pk == request.user.pk and manager.reports.count < 10 %}
+                                <a href="{% url 'app:report' %}" >Добавить отчёт</a>
                             {% endif %}
                             {% if user.is_authenticated %}
                                 <form method="post" action="{% url 'app:logout' %}" style="float: right">

@@ -2,6 +2,13 @@
 
 {% block content %}
 <h1>Отчёты пользователя {{ manager.last_name }} {{ manager.first_name }} {{ manager.middle_name }}</h1>
+    {% if manager.reports.count >= 10 %}
+        <div class="alert alert-error" style="border: none;">
+            Превышено допустимое кол-во добавленных отчётов.
+            <br>
+            Для добавления новых нужно удалить старые.
+        </div>
+    {% endif %}
     <table border="1">
         <thead>
             <tr>
